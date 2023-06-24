@@ -1,0 +1,68 @@
+/* Header */
+.width_ {
+  width: 90%;
+  margin: auto;
+}
+
+.font2 {
+  font-size: 2vmax;
+}
+
+.font22 {
+  font-size: 2vmax;
+}
+.navBar {
+  display: flex;
+  align-items: center;
+  height: 96px;
+  justify-content: space-between;
+}
+.navMidForm {
+  display: flex;
+}
+
+/* Home */
+.HomeWarper {
+  max-width: 100%;
+}
+.homeSlideBar {
+  display: flex;
+}
+
+/* .homeContainer {
+  display: flex;
+  height: 100vh;
+}
+
+.positionRelative {
+  position: relative;
+  top: 0;
+  left: 0;
+} */
+
+@media (max-width: 768px) {
+  .navMidForm {
+    display: none;
+  }
+}
+@media (max-width: 1080px) {
+  .width_ {
+    width: 90%;
+  }
+  .navBar > div {
+    width: 50%;
+  }
+  .navBar > div > form > input {
+    width: 100%;
+  }
+
+  .homeSlideBar {
+    display: none;
+  }
+}
+
+@media (min-width: 1080px) {
+  .Header-right {
+    display: none;
+  }
+}
