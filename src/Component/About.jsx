@@ -1,18 +1,5 @@
-import React, { useContext } from "react";
-import DarkThemeContext from "../Context/DarkModeContext";
-import SlideBar from "../Layout/SlideBar";
+import React from "react";
 
-const About = () => {
-  const { darkTheme } = useContext(DarkThemeContext);
-  return (
-    <section className="HomeWarper">
-      <SlideBar />
-      <div
-        className={`bg-body-${darkTheme ? "light" : "dark"}`}
-        style={{ marginTop: "4rem" }}
-      ></div>
-    </section>
-  );
-};
-
-export default About;
+export default function About() {
+  return <div>About</div>;
+}

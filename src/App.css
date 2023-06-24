@@ -1,68 +1,74 @@
-/* Header */
-.width_ {
-  width: 90%;
-  margin: auto;
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+* {
+  font-family: "Ubuntu", sans-serif;
 }
 
-.font2 {
-  font-size: 2vmax;
-}
-
-.font22 {
-  font-size: 2vmax;
-}
-.navBar {
-  display: flex;
-  align-items: center;
-  height: 96px;
-  justify-content: space-between;
-}
-.navMidForm {
-  display: flex;
-}
-
-/* Home */
-.HomeWarper {
-  max-width: 100%;
-}
-.homeSlideBar {
-  display: flex;
-}
-
-/* .homeContainer {
-  display: flex;
+.maxHW {
+  width: 100%;
   height: 100vh;
 }
-
-.positionRelative {
-  position: relative;
-  top: 0;
-  left: 0;
-} */
-
-@media (max-width: 768px) {
-  .navMidForm {
-    display: none;
-  }
+.w_100px {
+  width: 100px;
 }
-@media (max-width: 1080px) {
-  .width_ {
-    width: 90%;
-  }
-  .navBar > div {
-    width: 50%;
-  }
-  .navBar > div > form > input {
-    width: 100%;
-  }
-
-  .homeSlideBar {
-    display: none;
-  }
+.W_90 {
+  width: 90%;
+}
+.W_20 {
+  width: 20%;
+}
+.W_10 {
+  width: 10%;
+}
+.sortCard {
+  width: 25%;
+}
+.cardSubtitle {
+  font-size: 0.85rem;
 }
 
-@media (min-width: 1080px) {
-  .Header-right {
-    display: none;
-  }
+.surahs {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+  width: 90%;
+  margin-inline: auto;
+}
+.surahCard {
+  background-color: white;
+  text-decoration: none;
+  padding: 20px;
+  text-align: start;
+  color: black;
+  border-radius: 2vmax;
+}
+.surahNumber {
+  float: right;
+}
+.surah-card-main {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: end;
+}
+
+.surahNumber {
+  position: absolute;
+  background-color: #cef2ee;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  text-align: center;
+  color: #00b69a;
+}
+
+.englishNameTranslation {
+  font-size: 12px;
+  color: #9fb1c3;
+}
+
+.numberOfAyahs,
+.revelationType {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
 }
