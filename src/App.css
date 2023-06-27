@@ -1,17 +1,23 @@
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 * {
-  font-family: "Ubuntu", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.maxHW {
-  width: 100%;
+.home-wrapper {
   height: 100vh;
+  width: 100%;
 }
-.w_100px {
+.w_100 {
   width: 100px;
 }
 .W_90 {
   width: 90%;
+}
+.W_60 {
+  width: 60%;
+}
+.W_50 {
+  width: 50%;
 }
 .W_20 {
   width: 20%;
@@ -19,6 +25,78 @@
 .W_10 {
   width: 10%;
 }
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  width: 100%;
+}
+
+.hero {
+  width: 100%;
+  background-image: url("https://res.cloudinary.com/dwpi8ryr2/image/upload/v1687705660/products/small_quran_in_the_center_spbycf.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  margin-top: 2vmax;
+  padding: 5vmax auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30vmax;
+}
+
+.heroImage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchBar {
+  width: 60%;
+  height: 50px;
+}
+.heroSection {
+  width: 90%;
+}
+@media screen and (max-width: 768px) {
+  .home-wrapper {
+    margin-top: 8vmax;
+  }
+  .hero {
+    height: 30vmax;
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+  .heroSection {
+    width: 90%;
+  }
+  .searchBar {
+    width: 100%;
+    margin: auto;
+  }
+}
+.fix-search {
+  position: fixed;
+  top: 80px;
+  z-index: 2;
+  transition: all 0.3s ease-in-out;
+}
+.btn-change {
+  height: 40px;
+  width: 100px;
+  margin: 20px;
+  float: left;
+  border: 0px;
+  box-shadow: 0 0 1px #ccc;
+  transition: all 0.3s linear;
+  box-shadow: 0px 0 0 #cecece inset;
+}
+.btn-change:hover {
+  box-shadow: -100px 0 0 #b7b7b7 inset;
+}
+
 .sortCard {
   width: 25%;
 }
@@ -28,41 +106,75 @@
 
 .surahs {
   margin-top: 20px;
+  /* 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 20px;
+  */
   width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
   margin-inline: auto;
 }
+
 .surahCard {
+  flex: 1;
   background-color: white;
   text-decoration: none;
+  box-sizing: border-box;
   padding: 20px;
+  margin: 20px;
   text-align: start;
   color: black;
   border-radius: 2vmax;
+  background: rgb(236, 236, 236);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  transition: all 0.3s ease;
 }
+.surahCard:hover {
+  transform: translateY(-10%);
+}
+@media (min-width: 768px) {
+  .surahCard {
+    flex-basis: 25%;
+  }
+}
+@media (max-width: 767px) {
+  .surahCard {
+    flex-basis: 50%;
+  }
+}
+
 .surahNumber {
   float: right;
+  font-size: 1.2vmax;
 }
 .surah-card-main {
   display: flex;
-  flex-direction: row-reverse;
-  justify-content: end;
+  flex-direction: reverse;
+  justify-content: flex-end;
 }
-
+.surahEngName {
+  font-size: 2vmax;
+}
 .surahNumber {
   position: absolute;
   background-color: #cef2ee;
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   text-align: center;
   color: #00b69a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .englishNameTranslation {
-  font-size: 12px;
+  font-size: 1.2vmax;
   color: #9fb1c3;
 }
 
@@ -70,5 +182,99 @@
 .revelationType {
   margin: 0;
   padding: 0;
-  font-size: 14px;
+  font-size: 1vmax;
+}
+
+/* // helper */
+.center-xy {
+  /* /width: inherit; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.containerCheck {
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  align-items: top;
+  justify-content: center;
+}
+
+p {
+  font-size: 24px;
+  letter-spacing: 0.2px;
+  margin: 24px auto;
+}
+
+/* surah details page */
+@import url("https://fonts.googleapis.com/css?family=Tajawal");
+.AR_Font {
+  font-family: "Tajawal", sans-serif;
+  margin: 0;
+}
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+.surah_Font {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 3vmax;
+  font-weight: bold;
+}
+.size1-5v {
+  font-size: 1.5vmax;
+}
+.size1v {
+  font-size: 1vmax;
+}
+.size2V {
+  font-size: 2vmax;
+  margin: 0;
+}
+.size3V {
+  font-size: 3vmax;
+  margin: 0;
+}
+.surahNameEN {
+  font-size: 4vmax;
+}
+.darkTheme {
+  color: white;
+  background-color: black;
+}
+.lightTheme {
+  color: black;
+  background-color: white;
+}
+
+.HeaderFixedTop {
+  position: fixed;
+  top: 89px;
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+
+.scrollable-menu {
+  max-height: 200px; /* Adjust the height as needed */
+  overflow-y: auto;
+}
+
+.SurahInfo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-image: url("https://res.cloudinary.com/dwpi8ryr2/image/upload/v1687862401/products/small_quran_in_the_center_1_m8lx78.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.HoverUnderLine {
+  text-decoration: none;
+}
+.HoverUnderLine:hover {
+  text-decoration: underline;
 }

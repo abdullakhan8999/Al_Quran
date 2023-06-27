@@ -1,135 +1,108 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-
-import { Link } from "react-router-dom";
-import DarkThemeContext from "../../Context/DarkModeContext";
+import { Link, useNavigate } from "react-router-dom";
+import DarkThemeContext from "../../Context/Context";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import Hero_Home from "./Hero_Home";
 
 export default function Home() {
-  const { darkTheme, filteredData, setFilteredData } =
-    useContext(DarkThemeContext);
-  const [inSerialOrder, setInSerialOrder] = useState(true);
-
+  const navigate = useNavigate();
+  const {
+    darkTheme,
+    filteredData,
+    setFilteredData,
+    searchSurah,
+    setSearchSurah,
+    favorites,
+    setFavorites,
+  } = useContext(DarkThemeContext);
   const containerRef = useRef(null);
+  const homeWrapperRef = useRef(null);
+  const searchBarRef = useRef(null);
+  const searchBarObserver = useRef(null);
+
   useEffect(() => {
+    // Load favorites from local storage
+    const storedFavorites = localStorage.getItem("favorites");
+    if (storedFavorites) {
+      setFavorites(JSON.parse(storedFavorites));
+    }
+
     const containerElement = containerRef.current;
     if (containerElement) {
       const isSmallDevice = window.innerWidth <= 768;
       if (isSmallDevice) {
         containerElement.classList.add("overflow-x-scroll");
-        containerElement.classList.remove("justify-content-start");
         containerElement.classList.remove("W_90");
-        containerElement.classList.remove("mx-autojustify-content-start");
+        containerElement.classList.remove("justify-content-center");
+        containerElement.classList.remove("mx-auto");
       } else {
+        containerElement.classList.add("mx-auto");
+        containerElement.classList.add("justify-content-center");
         containerElement.classList.remove("overflow-x-scroll");
       }
     }
+    const homeWrapper = homeWrapperRef.current;
+    const searchBar = searchBarRef.current;
+
+    searchBarObserver.current = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          searchBar.classList.add("fix-search");
+        } else {
+          searchBar.classList.remove("fix-search");
+        }
+      });
+    });
+
+    if (homeWrapper && searchBar) {
+      searchBarObserver.current.observe(homeWrapper);
+    }
+
+    return () => {
+      if (searchBarObserver.current) {
+        searchBarObserver.current.disconnect();
+      }
+    };
   }, []);
 
-  const SortBySerial = () => {
-    let sorted;
-    if (inSerialOrder) {
-      sorted = [...filteredData].sort((a, b) => b.number - a.number);
-      setFilteredData(sorted);
-      setInSerialOrder(false);
+  useEffect(() => {
+    // Update local storage when favorites change
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  const addToFavorites = (surah) => {
+    // Check if the surah is already in favorites
+    const isFavorite = favorites.some((item) => item.number === surah.number);
+    if (!isFavorite) {
+      setFavorites([...favorites, surah]);
     } else {
-      sorted = [...filteredData].sort((a, b) => a.number - b.number);
-      setFilteredData(sorted);
-      setInSerialOrder(true);
+      const updatedFavorites = favorites.filter(
+        (item) => item.number !== surah.number
+      );
+      setFavorites(updatedFavorites);
     }
   };
-  const SortBySurahName = () => {
-    let sorted;
-    if (inSerialOrder) {
-      sorted = [...filteredData].sort((a, b) =>
-        b.englishName.localeCompare(a.englishName)
-      );
-      setFilteredData(sorted);
-      setInSerialOrder(false);
-    } else {
-      sorted = [...filteredData].sort((a, b) =>
-        a.englishName.localeCompare(b.englishName)
-      );
-      setFilteredData(sorted);
-      setInSerialOrder(true);
-    }
+  const isFavorite = (surah) => {
+    return favorites.some((item) => item.number === surah.number);
   };
-  const SortByTotalAyah = () => {
-    let sorted;
-    if (inSerialOrder) {
-      sorted = [...filteredData].sort(
-        (a, b) => a.numberOfAyahs - b.numberOfAyahs
-      );
-      setFilteredData(sorted);
-      setInSerialOrder(false);
-    } else {
-      sorted = [...filteredData].sort(
-        (a, b) => b.numberOfAyahs - a.numberOfAyahs
-      );
-      setFilteredData(sorted);
-      setInSerialOrder(true);
-    }
-  };
-  console.log(filteredData[0]);
+
   return (
-    <section className="maxHW">
-      <div className=" mx-auto">
-        <div
-          ref={containerRef}
-          className="d-flex justify-content-start W_90 mx-auto pt-3"
-        >
-          <button
-            className="btn btn-secondary rounded-pill px-3 mx-1  text-nowrap"
-            type="button"
-            disabled
-          >
-            Sort by
-          </button>
-          <button
-            className="btn btn-light rounded-pill px-3 mx-1 text-nowrap"
-            type="button"
-            onClick={SortBySerial}
-          >
-            Serial
-          </button>
-          <button
-            className="btn btn-primary rounded-pill px-3 mx-1 text-nowrap"
-            type="button"
-            onClick={SortBySurahName}
-          >
-            Surah Name
-          </button>
-          <button
-            className="btn btn-info rounded-pill px-3 mx-1 text-nowrap"
-            type="button"
-            onClick={SortByTotalAyah}
-          >
-            Total Ayah
-          </button>
-          <button
-            className="btn btn-success rounded-pill px-3 mx-1 text-nowrap"
-            type="button"
-          >
-            Parah
-          </button>
-          <button
-            className="btn btn-danger rounded-pill px-3 mx-1 d-none text-nowrap"
-            type="button"
-          ></button>
-          <button
-            className="btn btn-warning rounded-pill px-3 mx-1 d-none text-nowrap"
-            type="button"
-          ></button>
-          <button
-            className="btn btn-dark rounded-pill px-3 mx-1 d-none text-nowrap"
-            type="button"
-          ></button>
-        </div>
+    <section ref={homeWrapperRef} className="home-wrapper">
+      <div className="mx-auto">
+        <Hero_Home searchBarRef={searchBarRef} containerRef={containerRef} />
+        {filteredData.length > 0 ? (
+          <h2 className="W_90  text-center size3V text-uppercase  text-decoration-underline mx-auto mt-4 mb-2">
+            Surahs
+          </h2>
+        ) : (
+          ""
+        )}
         <div className="surahs">
           {filteredData.length > 0 ? (
-            filteredData.map((surah, index) => (
-              <Link
-                to="/"
-                className={`surahCard border border-success bg-${
-                  !darkTheme ? "dark  text-light" : ""
+            filteredData.map((surah) => (
+              <div
+                className={`surahCard bg-${
+                  !darkTheme ? "dark text-light" : ""
                 } text-decoration-none`}
                 key={surah.number}
               >
@@ -138,19 +111,37 @@ export default function Home() {
                     <span className="surahNumber">{surah.number}</span>
                   </div>
 
-                  <div className="surah-details-wrapper ">
+                  <Link
+                    className={`surah-details-wrapper ${
+                      !darkTheme ? " text-light" : "text-dark"
+                    } text-decoration-none`}
+                    to={`/surah/${surah.number}`}
+                    onClick={() => setSearchSurah("")}
+                  >
                     <h5 className="surahEngName">{surah.englishName}</h5>
                     <p className="englishNameTranslation">
                       {surah.englishNameTranslation}
                     </p>
                     <p className="numberOfAyahs">{`Verses: ${surah.numberOfAyahs}`}</p>
                     <p className="revelationType">{`Revelation: ${surah.revelationType}`}</p>
-                  </div>
+                  </Link>
+                  <button
+                    type="button"
+                    className="btn border-0 text-danger float-end float-top"
+                    onClick={() => addToFavorites(surah)}
+                  >
+                    {isFavorite(surah) ? <AiFillHeart /> : <AiOutlineHeart />}
+                  </button>
                 </div>
-              </Link>
+              </div>
             ))
           ) : (
-            <div className="noResults">No results found.</div>
+            <div className="containerCheck">
+              <div className="">
+                <p>Please Check the Name of surah/surah number.</p>
+                <span className="handle"></span>
+              </div>
+            </div>
           )}
         </div>
       </div>
