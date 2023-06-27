@@ -1,4 +1,4 @@
-﻿# Backend System for Hiring Platform
+﻿# Al Quran
 
 ![GitHub](https://img.shields.io/github/license/abdullakhan8999/Al_Quran.git)
 
