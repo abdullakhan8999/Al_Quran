@@ -4,18 +4,8 @@ import { Link } from "react-router-dom";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 export default function Favorite() {
-  const {
-    darkTheme,
-    filteredData,
-    setFilteredData,
-    searchSurah,
-    setSearchSurah,
-    favorites,
-    setFavorites,
-  } = useContext(DarkThemeContext);
-  // if (storedFavorites) {
-  //   setFavorites(JSON.parse(storedFavorites));
-  // }
+  const { darkTheme, setSearchSurah, favorites, setFavorites } =
+    useContext(DarkThemeContext);
   const addToFavorites = (surah) => {
     // Check if the surah is already in favorites
     const isFavorite = favorites.some((item) => item.number === surah.number);
