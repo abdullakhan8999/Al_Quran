@@ -1,20 +1,12 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import DarkThemeContext from "../../Context/Context";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import Hero_Home from "./Hero_Home";
+import HeroHome from "./Hero_Home";
 
 export default function Home() {
-  const navigate = useNavigate();
-  const {
-    darkTheme,
-    filteredData,
-    setFilteredData,
-    searchSurah,
-    setSearchSurah,
-    favorites,
-    setFavorites,
-  } = useContext(DarkThemeContext);
+  const { darkTheme, filteredData, setSearchSurah, favorites, setFavorites } =
+    useContext(DarkThemeContext);
   const containerRef = useRef(null);
   const homeWrapperRef = useRef(null);
   const searchBarRef = useRef(null);
@@ -63,7 +55,7 @@ export default function Home() {
         searchBarObserver.current.disconnect();
       }
     };
-  }, []);
+  }, [setFavorites]);
 
   useEffect(() => {
     // Update local storage when favorites change
@@ -89,7 +81,7 @@ export default function Home() {
   return (
     <section ref={homeWrapperRef} className="home-wrapper">
       <div className="mx-auto">
-        <Hero_Home searchBarRef={searchBarRef} containerRef={containerRef} />
+        <HeroHome searchBarRef={searchBarRef} containerRef={containerRef} />
         {filteredData.length > 0 ? (
           <h2 className="W_90  text-center size3V text-uppercase  text-decoration-underline mx-auto mt-4 mb-2">
             Surahs
