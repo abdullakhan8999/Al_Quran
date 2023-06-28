@@ -4,7 +4,7 @@
 
 ## Live
 
-🌐 Live: [Al Quran Website](https://master--friendly-tulumba-8fe712.netlify.app/)
+🌐 Live: [Al Quran Website](https://649b459540807c0008ffe91b--friendly-tulumba-8fe712.netlify.app/)
 
 ## Description
 
