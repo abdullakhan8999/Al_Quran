@@ -2,6 +2,10 @@
 
 ![GitHub](https://img.shields.io/github/license/abdullakhan8999/Al_Quran.git)
 
+## Live
+
+🌐 Live: [Al Quran Website](https://master--friendly-tulumba-8fe712.netlify.app/)
+
 ## Description
 
 This site is built to offer convenient and fast Quran access, with English translation and explanation. Users can freely browse and read diverse Surahs without the need to create an account. The site also provides a dark mode option for comfortable reading and is responsive on all devices.
